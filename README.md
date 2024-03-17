@@ -1,27 +1,27 @@
-# FormHandling
+# ngModelGroup
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.7.
+ngModelGroup in Angular forms is used to group multiple ngModel directives together. It allows you to manage related form controls as a group, which can be helpful for organizing and validating form data.
 
-## Development server
+Here are a few reasons why you might use ngModelGroup:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Logical Grouping: If you have a set of form controls that are related to each other, such as contact information (name, email, phone), you can use ngModelGroup to group them together logically.
 
-## Code scaffolding
+Validation: You can apply validation rules to the entire group using ngModelGroup, making it easier to validate a set of related fields at once.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Error Handling: When a form group contains multiple controls, you can display error messages for the entire group or individual controls within the group based on validation results.
 
-## Build
+Form Data Handling: When submitting the form, you can access the data from the grouped controls as an object within the larger form data structure.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Here's an example of how you might use ngModelGroup in an Angular form:
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<form #myForm="ngForm">
+  <div ngModelGroup="contactInfo">
+    <input type="text" name="name" ngModel required>
+    <input type="email" name="email" ngModel required>
+    <input type="tel" name="phone" ngModel required>
+  </div>
+  <button type="submit" [disabled]="myForm.invalid">Submit</button>
+</form>
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+In this example, ngModelGroup="contactInfo" groups the name, email, and phone inputs together under the contactInfo group. You can then access these fields as myForm.value.contactInfo.name, myForm.value.contactInfo.email, and myForm.value.contactInfo.phone in your component when handling form submission or validation.
